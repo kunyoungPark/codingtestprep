@@ -100,13 +100,12 @@ def find_path_ll_class(cur, datalist, end):
     return path
 
 
-def bfs_ll_dict(data, start, end):
+def bfs_sp_ll_dict(data, start, end):
     time1 = time.time()
     datalist = dict()
     # generate objects
     for d in data:
-       datalist[d] = {"idx": d, "visited": False, "discovered": False, "nn": data[d]}
-    time2 = time.time()
+       datalist[d] = {"idx": d, "visited": False, "discovered": False, "nn": data[d], "par": -1}
     # bfs
     start = datalist[start]
     start["visited"] = True
@@ -118,19 +117,21 @@ def bfs_ll_dict(data, start, end):
         for i in cur["nn"]:
             new_cur = datalist[i]
             if new_cur["idx"] == end:
-                break
+                time2 = time.time()
+                print(time2-time1)
+                return find_path_ll_dict(cur, datalist, end)
             if new_cur["visited"] != True and new_cur["discovered"] != True:
                 q.put(new_cur)
                 new_cur["discovered"] = True
-    time3 = time.time()
-    print(time2 - time1, time3 - time2)
+                new_cur["par"] = cur
+
 
 def find_path_ll_dict(cur, datalist, end):
     path = list()
-    path.append(cur.idx)
-    while cur.par != -1:
-        cur = datalist[cur.idx - 1].par
-        path.insert(0, cur.idx)
+    path.append(cur["idx"])
+    while cur["par"] != -1:
+        cur = datalist[cur["idx"]]["par"]
+        path.insert(0, cur["idx"])
     path.append(end)
     return path
 
@@ -168,4 +169,4 @@ nx.draw(g2)
 
 print(bfs_sp_ll_class(data_ll, 1, 10))
 
-bfs_ll_dict(data_ll, 1, 10)
+print(bfs_sp_ll_dict(data_ll, 1, 10))
