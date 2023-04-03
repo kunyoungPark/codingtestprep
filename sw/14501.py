@@ -1,15 +1,31 @@
 
+def dfs_maxp(L):
+    global sumDays, pay, maxpay
+    if L == n or sumDays >= n:
+        print(pay)
+        if maxpay < pay:
+            maxpay = pay
+        sumDays = 0
+        pay = 0
+        return
+
+    for i in range(n):
+        if not d[i]["v"]:
+            d[i]["v"] = True
+            sumDays += d[i]["days"]
+            pay += d[i]["p"]
+            dfs_maxp(L + 1)
+            d[i]["v"] = False
 
 
-a = int(input())
-ml = list(map(int, input.split()))
+n = int(input())
+d = dict()
+for i in range(n):
+    temp = list(map(int, input().split()))
+    d[i] = {"days": temp[0], "v": False, "p": temp[1]}
 
-dp = [0 for _ in range (a + 1)]
-
-for i in range(a - 1, -1, -1):
-    if i + ml[i][0] > a:
-        dp[i] = dp[i+1]
-    else:
-        dp[i] = max(dp[i+1], ml[i][1], dp[i+ml[i][0]])
-
-print(dp[0])
+sumDays = 0
+pay = 0
+maxpay = 0
+dfs_maxp(0)
+print(sumDays, pay, maxpay)
