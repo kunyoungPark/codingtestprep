@@ -2,7 +2,7 @@ from queue import Queue
 import time
 
 
-def dfs(data):
+def bfs(data):
     # directions
     tx = (+1, -1, 0, 0)
     ty = (0, 0, +1, -1)
@@ -52,5 +52,5 @@ data1 = [[1, 0, 1, 1, 1], [1, 0, 1, 0, 1], [1, 0, 1, 1, 1], [1, 1, 1, 0, 1], [0,
 [0,0,0,0,1]
 """
 data2 = [[1, 0, 1, 1, 1], [1, 0, 1, 0, 1], [1, 0, 1, 1, 1], [1, 1, 1, 0, 0], [0, 0, 0, 0, 1]]
-print(dfs(data1))
-print(dfs(data2))
+print(bfs(data1))
+print(bfs(data2))

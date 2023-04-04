@@ -2,7 +2,7 @@ from queue import Queue
 import time
 
 
-def dfs(data):
+def bfs(data):
     #directions
     tx = (+1, -1, 0, 0)
     ty = (0, 0, +1, -1)
@@ -44,4 +44,4 @@ data1 = [[1,0,1,1,1],[1,0,1,0,1],[1,0,1,1,1],[1,1,1,0,1],[0,0,0,0,1]]
 """
 
 
-dfs(data1)
+bfs(data1)
